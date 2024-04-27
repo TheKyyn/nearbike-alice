@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Serveur Alice</title>
+</head>
+<body>
+    <h1>Bienvenue sur le Serveur Alice</h1>
+    <pre id="data">Chargement des données...</pre>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            fetch("/get-velib-data")
+            .then((response) => response.json())
+            .then((data) => {
+                const container = document.getElementById("data");
+                container.textContent = JSON.stringify(data, null, 2);
+            })
+            .catch((error) => {
+                console.error('Erreur lors de la récupération des données:', error);
+                document.getElementById("data").textContent = "Erreur lors du chargement des données.";
+            });
+        });
+    </script>
+</body>
+</html>
