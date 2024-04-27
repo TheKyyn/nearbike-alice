@@ -1,25 +1,31 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Mes Favoris</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Mes Stations Favorites</h1>
     {% if favorites %}
-        <ul>
-        {% for favorite in favorites %}
-            <li>
-                Station code: {{ favorite.station_code }}
-                <form action="{{ url_for('main.delete_favorite', id=favorite.id) }}" method="post">
-                    <button type="submit">Retirer des favoris</button>
-                </form>
-            </li>
-        {% endfor %}
-        </ul>
+    <ul>
+      {% for favorite in favorites %}
+      <li>
+        Station code: {{ favorite.station_code }}
+        <form
+          action="{{ url_for('main.delete_favorite', id=favorite.id) }}"
+          method="post"
+        >
+          <button type="submit">Retirer des favoris</button>
+        </form>
+        <a href="{{ url_for('main.edit_favorite', id=favorite.id) }}"
+          >Modifier</a
+        >
+      </li>
+      {% endfor %}
+    </ul>
     {% else %}
-        <p>Aucune station favorite ajoutée.</p>
+    <p>Aucune station favorite ajoutée.</p>
     {% endif %}
     <a href="{{ url_for('main.index') }}">Retour à l'accueil</a>
-</body>
+  </body>
 </html>

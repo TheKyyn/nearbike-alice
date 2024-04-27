@@ -36,6 +36,34 @@ def favorites():
         pass
     return render_template('favorites.html', favorites=current_user.favorites)
 
+@main.route('/add_favorite', methods=['POST'])
+@login_required
+def add_favorite():
+    station_code = request.form['station_code']
+    if not Favorite.query.filter_by(user_id=current_user.id, station_code=station_code).first():
+        new_favorite = Favorite(user_id=current_user.id, station_code=station_code)
+        db.session.add(new_favorite)
+        db.session.commit()
+        flash('Station added to favorites.')
+    else:
+        flash('Station is already in favorites.')
+    return redirect(url_for('main.favorites'))
+
+@main.route('/edit_favorite/<int:id>', methods=['GET', 'POST'])
+@login_required
+def edit_favorite(id):
+    favorite = Favorite.query.get_or_404(id)
+    if request.method == 'POST':
+        if favorite.user_id != current_user.id:
+            abort(403)
+        new_station_code = request.form['station_code']
+        favorite.station_code = new_station_code
+        db.session.commit()
+        flash('Favorite updated successfully.')
+        return redirect(url_for('main.favorites'))
+    return render_template('edit_favorite.html', favorite=favorite)
+
+
 @main.route('/delete_favorite/<int:id>', methods=['POST'])
 @login_required
 def delete_favorite(id):

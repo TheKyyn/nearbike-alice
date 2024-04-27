@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modifier Favori</title>
+</head>
+<body>
+    <h1>Modifier Favori</h1>
+    <form action="{{ url_for('main.edit_favorite', id=favorite.id) }}" method="post">
+        <div>
+            <label for="station_code">Code de Station:</label>
+            <input type="text" id="station_code" name="station_code" value="{{ favorite.station_code }}" required>
+        </div>
+        <div>
+            <button type="submit">Mettre à jour</button>
+        </div>
+    </form>
+    <a href="{{ url_for('main.favorites') }}">Retour aux favoris</a>
+</body>
+</html>
