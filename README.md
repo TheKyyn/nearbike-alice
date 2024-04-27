@@ -60,6 +60,6 @@ Accédez à l'application via http://localhost:5000 après le lancement du serve
 
 Les contributions à ce projet sont bienvenues. Veuillez suivre les pratiques standard pour proposer des améliorations ou des corrections.
 
-###Licence
+### Licence
 
 Ce projet est sous licence libre, vous pouvez le redistribuer et/ou le modifier selon les termes de la Licence Publique Générale GNU publiée par la Free Software Foundation.
