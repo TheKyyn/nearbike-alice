@@ -52,10 +52,25 @@ def signup():
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
-        hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
-        new_user = User(username=username, password=hashed_password)
-        db.session.add(new_user)
-        db.session.commit()
-        return redirect(url_for('main.login'))
+        existing_user = User.query.filter_by(username=username).first()
+        if existing_user is None:
+            hashed_password = bcrypt.generate_password_hash(password).decode('utf-8')
+            new_user = User(username=username, password=hashed_password)
+            db.session.add(new_user)
+            db.session.commit()
+            login_user(new_user)
+            return redirect(url_for('main.index'))
+        flash('Username already exists.')
     return render_template('signup.html')
 
+@main.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    if request.method == 'POST':
+        current_user.username = request.form['username']
+        if request.form['password']:
+            current_user.password = bcrypt.generate_password_hash(request.form['password']).decode('utf-8')
+        db.session.commit()
+        flash('Your profile has been updated.')
+        return redirect(url_for('main.profile'))
+    return render_template('profile.html')
