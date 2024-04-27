@@ -1,24 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Serveur Alice</title>
-</head>
-<body>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <style>
+      #map {
+        height: 400px; /* ça définis la hauteur de la carte */
+      }
+    </style>
+  </head>
+  <body>
     <h1>Bienvenue sur le Serveur Alice</h1>
+    <div id="map"></div>
     <pre id="data">Chargement des données...</pre>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            fetch("/get-velib-data")
-            .then((response) => response.json())
-            .then((data) => {
-                const container = document.getElementById("data");
-                container.textContent = JSON.stringify(data, null, 2);
-            })
-            .catch((error) => {
-                console.error('Erreur lors de la récupération des données:', error);
-                document.getElementById("data").textContent = "Erreur lors du chargement des données.";
+      document.addEventListener("DOMContentLoaded", function () {
+        // on initie la carte au centre de Paris
+        var map = L.map("map").setView([48.8566, 2.3522], 13);
+
+        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution:
+            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        }).addTo(map);
+
+        // la requête pr les données des stations
+        fetch("/get-velib-data")
+          .then((response) => response.json())
+          .then((data) => {
+            const container = document.getElementById("data");
+            container.textContent = JSON.stringify(data, null, 2);
+
+            // et on les affiche ici
+            data.records.forEach(function (station) {
+              var marker = L.marker([
+                station.geometry.coordinates[1],
+                station.geometry.coordinates[0],
+              ]).addTo(map);
+              marker.bindPopup(
+                "<b>" +
+                  station.fields.name +
+                  "</b><br>" +
+                  "Vélos disponibles: " +
+                  station.fields.numbikesavailable +
+                  "<br>" +
+                  "Places disponibles: " +
+                  station.fields.numdocksavailable
+              );
             });
-        });
+          })
+          .catch((error) => {
+            console.error("Erreur lors de la récupération des données:", error);
+            document.getElementById("data").textContent =
+              "Erreur lors du chargement des données.";
+          });
+      });
     </script>
-</body>
+  </body>
 </html>
