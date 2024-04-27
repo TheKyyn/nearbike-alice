@@ -2,6 +2,9 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from dotenv import load_dotenv
+
+load_dotenv()
 
 db = SQLAlchemy()
 login_manager = LoginManager()
@@ -9,8 +12,8 @@ bcrypt = Bcrypt()
 
 def create_app():
     app = Flask(__name__)
-    app.config['SECRET_KEY'] = 'un_secret_très_sécurisé'
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.sqlite'
+    app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'une_valeur_par_défaut')
+    app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'sqlite:///db.sqlite')
 
     db.init_app(app)
     login_manager.init_app(app)
