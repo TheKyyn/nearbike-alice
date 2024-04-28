@@ -1,71 +1,48 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>Serveur Alice</title>
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-    <style>
-      #map {
-        height: 400px; /* ça définis la hauteur de la carte */
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Bienvenue sur le Serveur Alice</h1>
-    <div id="map"></div>
-    <pre id="data">Chargement des données...</pre>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        // on initie la carte au centre de Paris
-        var map = L.map("map").setView([48.8566, 2.3522], 13);
+<head>
+  <title>Serveur Alice</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <link rel="stylesheet" href="static/styles.css" />
+</head>
+<body>
+<figure>
+  <svg width="1114" height="203" viewBox="0 0 1114 203" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M15.476 185.456V42.144C15.476 41.4373 15.688 40.872 16.112 40.448C16.6773 39.8827 17.3133 39.6 18.02 39.6H38.16C40.9867 39.6 43.3187 40.7307 45.156 42.992L121.476 142.208V42.144C121.476 40.448 122.324 39.6 124.02 39.6H145.856C147.552 39.6 148.4 40.448 148.4 42.144V185.456C148.4 187.152 147.552 188 145.856 188H125.716C122.889 188 120.557 186.869 118.72 184.608L42.612 85.392V185.456C42.612 187.152 41.6933 188 39.856 188H18.02C17.3133 188 16.6773 187.788 16.112 187.364C15.688 186.799 15.476 186.163 15.476 185.456ZM179.031 42.144C179.031 41.4373 179.243 40.872 179.667 40.448C180.232 39.8827 180.868 39.6 181.575 39.6H273.159C274.855 39.6 275.703 40.448 275.703 42.144V63.98C275.703 65.676 274.855 66.524 273.159 66.524H206.167V100.444H259.167C260.863 100.444 261.711 101.292 261.711 102.988V124.612C261.711 126.449 260.863 127.368 259.167 127.368H206.167V161.076H279.731C280.579 161.076 281.144 161.429 281.427 162.136C281.851 162.843 281.78 163.479 281.215 164.044L265.527 184.608C263.689 186.869 261.357 188 258.531 188H181.575C180.868 188 180.232 187.788 179.667 187.364C179.243 186.799 179.031 186.163 179.031 185.456V42.144ZM301.8 185.456V42.144C301.8 41.4373 302.012 40.872 302.436 40.448C303.002 39.8827 303.638 39.6 304.344 39.6H324.484C327.311 39.6 329.643 40.7307 331.48 42.992L440.66 185.032C441.084 185.739 441.084 186.445 440.66 187.152C440.378 187.717 439.812 188 438.964 188H412.04C409.214 188 406.882 186.869 405.044 184.608L368.368 136.696L331.48 184.608C329.643 186.869 327.311 188 324.484 188H304.344C303.638 188 303.002 187.788 302.436 187.364C302.012 186.799 301.8 186.163 301.8 185.456ZM328.936 85.392V142.208L350.772 113.8L328.936 85.392ZM457.488 41.72C457.488 41.0133 457.7 40.448 458.124 40.024C458.689 39.4587 459.325 39.176 460.032 39.176H571.968C572.674 39.176 573.24 39.4587 573.664 40.024C574.229 40.448 574.512 41.0133 574.512 41.72V72.884C574.512 74.8627 573.876 76.6293 572.604 78.184L539.108 122.068L587.02 184.608C587.444 185.315 587.444 186.021 587.02 186.728C586.737 187.293 586.242 187.576 585.536 187.576H558.612C555.785 187.576 553.453 186.445 551.616 184.184L505.188 123.764C504.198 122.633 504.198 121.573 505.188 120.584L546.952 66.1H484.624V185.032C484.624 186.728 483.705 187.576 481.868 187.576H460.032C459.325 187.576 458.689 187.364 458.124 186.94C457.7 186.375 457.488 185.739 457.488 185.032V41.72ZM607.024 39.6H718.96C720.656 39.6 721.504 40.448 721.504 42.144V73.308C721.504 75.2867 720.939 77.0533 719.808 78.608L692.672 113.8L719.808 148.992C720.939 150.547 721.504 152.313 721.504 154.292V185.456C721.504 187.152 720.656 188 718.96 188H607.024C606.317 188 605.681 187.788 605.116 187.364C604.692 186.799 604.48 186.163 604.48 185.456V42.144C604.48 41.4373 604.692 40.872 605.116 40.448C605.681 39.8827 606.317 39.6 607.024 39.6ZM693.732 161.076L658.752 115.496C658.045 114.365 658.045 113.305 658.752 112.316L693.732 66.524H631.616V161.076H693.732ZM754.637 39.6H776.473C778.311 39.6 779.229 40.448 779.229 42.144V185.456C779.229 187.152 778.311 188 776.473 188H754.637C753.931 188 753.295 187.788 752.729 187.364C752.305 186.799 752.093 186.163 752.093 185.456V42.144C752.093 41.4373 752.305 40.872 752.729 40.448C753.295 39.8827 753.931 39.6 754.637 39.6ZM845.471 112.316L898.683 42.992C900.52 40.7307 902.852 39.6 905.679 39.6H932.603C933.451 39.6 934.016 39.9533 934.299 40.66C934.723 41.2253 934.723 41.8613 934.299 42.568L879.603 113.8L934.087 185.032C934.652 185.739 934.723 186.445 934.299 187.152C934.016 187.717 933.451 188 932.603 188H905.679C902.852 188 900.52 186.869 898.683 184.608L845.471 115.496C844.764 114.365 844.764 113.305 845.471 112.316ZM809.855 42.144C809.855 41.4373 810.067 40.872 810.491 40.448C811.056 39.8827 811.692 39.6 812.399 39.6H834.235C836.072 39.6 836.991 40.448 836.991 42.144V185.456C836.991 187.152 836.072 188 834.235 188H812.399C811.692 188 811.056 187.788 810.491 187.364C810.067 186.799 809.855 186.163 809.855 185.456V42.144ZM951.05 42.144C951.05 41.4373 951.262 40.872 951.686 40.448C952.252 39.8827 952.888 39.6 953.594 39.6H1045.18C1046.87 39.6 1047.72 40.448 1047.72 42.144V63.98C1047.72 65.676 1046.87 66.524 1045.18 66.524H978.186V100.444H1031.19C1032.88 100.444 1033.73 101.292 1033.73 102.988V124.612C1033.73 126.449 1032.88 127.368 1031.19 127.368H978.186V161.076H1051.75C1052.6 161.076 1053.16 161.429 1053.45 162.136C1053.87 162.843 1053.8 163.479 1053.23 164.044L1037.55 184.608C1035.71 186.869 1033.38 188 1030.55 188H953.594C952.888 188 952.252 187.788 951.686 187.364C951.262 186.799 951.05 186.163 951.05 185.456V42.144Z" fill="#FA4454"/>
+    <path d="M1056.22 3.92C1056.22 3.81333 1056.25 3.728 1056.31 3.664C1056.4 3.57867 1056.49 3.536 1056.6 3.536H1070.49C1070.91 3.536 1071.27 3.70667 1071.54 4.048L1073.91 7.152C1074 7.25867 1074.01 7.36533 1073.94 7.472C1073.9 7.55733 1073.82 7.6 1073.69 7.6H1066.55V25.552C1066.55 25.808 1066.42 25.936 1066.17 25.936H1062.87C1062.62 25.936 1062.49 25.808 1062.49 25.552V7.6H1056.6C1056.49 7.6 1056.4 7.568 1056.31 7.504C1056.25 7.41867 1056.22 7.32267 1056.22 7.216V3.92ZM1074.41 25.552L1090.86 4.112C1091.14 3.77067 1091.49 3.6 1091.92 3.6H1094.96C1095.21 3.6 1095.34 3.728 1095.34 3.984V19.088L1106.86 4.112C1107.14 3.77067 1107.49 3.6 1107.92 3.6H1110.96C1111.21 3.6 1111.34 3.728 1111.34 3.984V25.616C1111.34 25.872 1111.21 26 1110.96 26H1107.66C1107.38 26 1107.25 25.872 1107.25 25.616V10.512L1095.76 25.488C1095.48 25.8293 1095.13 26 1094.7 26H1091.66C1091.41 26 1091.28 25.872 1091.28 25.616V10.512L1079.76 25.488C1079.48 25.8293 1079.13 26 1078.7 26H1074.64C1074.53 26 1074.45 25.9573 1074.38 25.872C1074.32 25.7653 1074.33 25.6587 1074.41 25.552Z" fill="#DC3D4B"/>
+  </svg>
+</figure>
+<div id="map"></div>
+<div style="margin-top: 20px;">
+  <button onclick="location.href='{{ url_for('main.login') }}'">Se Connecter</button>
+  <button onclick="location.href='{{ url_for('main.signup') }}'">S'inscrire</button>
+</div>
+<form action="{{ url_for('main.add_favorite') }}" method="post" style="margin-top: 20px;">
+  <input type="text" id="station_code" name="station_code" placeholder="Entrer le Code de la Station" required />
+  <button type="submit">Ajouter aux Favoris</button>
+</form>
+<pre id="data">Chargement des données...</pre>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    var map = L.map("map").setView([48.8566, 2.3522], 13);
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    }).addTo(map);
 
-        L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution:
-            '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        }).addTo(map);
-
-        // la requête pr les données des stations
-        fetch("http://127.0.0.1:5001/data")
-          .then((response) => response.json())
-          .then((data) => {
-            const container = document.getElementById("data");
-            container.textContent = JSON.stringify(data, null, 2);
-
-            // et on les affiche ici
-            data.records.forEach(function (station) {
-              var marker = L.marker([
-                station.geometry.coordinates[1],
-                station.geometry.coordinates[0],
-              ]).addTo(map);
-              marker.bindPopup(
-                "<b>" +
-                  station.fields.name +
-                  "</b><br>" +
-                  "Vélos disponibles: " +
-                  station.fields.numbikesavailable +
-                  "<br>" +
-                  "Places disponibles: " +
-                  station.fields.numdocksavailable
-              );
-            });
-          })
-          .catch((error) => {
-            console.error("Erreur lors de la récupération des données:", error);
-            document.getElementById("data").textContent =
-              "Erreur lors du chargement des données.";
-          });
-      });
-    </script>
-
-    <form action="{{ url_for('main.add_favorite') }}" method="post">
-      <input
-        type="text"
-        id="station_code"
-        name="station_code"
-        placeholder="Enter Station Code"
-        required
-      />
-      <button type="submit">Add to Favorites</button>
-    </form>
-  </body>
+    fetch("http://127.0.0.1:5001/data")
+            .then((response) => response.json())
+            .then((data) => {
+              document.getElementById("data").textContent = JSON.stringify(data, null, 2);
+              data.records.forEach(function (station) {
+                var marker = L.marker([station.geometry.coordinates[1], station.geometry.coordinates[0]]).addTo(map);
+                marker.bindPopup("<b>" + station.fields.name + "</b><br>Vélos disponibles: " + station.fields.numbikesavailable + "<br>Places disponibles: " + station.fields.numdocksavailable);
+              });
+            }).catch((error) => {
+      console.error("Erreur lors de la récupération des données:", error);
+      document.getElementById("data").textContent = "Erreur lors du chargement des données.";
+    });
+  });
+</script>
+</body>
 </html>

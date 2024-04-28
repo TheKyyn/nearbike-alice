@@ -1,11 +1,14 @@
+import os
+from dotenv import load_dotenv
+
+# Chargement du fichier .env depuis le répertoire 'app'
+dotenv_path = os.path.join(os.path.dirname(__file__), 'app', '.env')
+load_dotenv(dotenv_path)
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
-from dotenv import load_dotenv
-import os
-
-load_dotenv()
 
 db = SQLAlchemy()
 login_manager = LoginManager()
