@@ -3,6 +3,7 @@
 ## Description
 
 Serveur Alice est une application web Flask qui gère l'interface utilisateur pour une application de facilitation de parcours à vélo pour les usagers de la ville de Paris. Ce serveur permet l'authentification des utilisateurs, la gestion des stations Vélib favorites, et affiche les données récupérées du Serveur Bob.
+Avanr de lancer l'application, assurez-vous que le Serveur Bob est en cours d'exécution et que les données de disponibilité des Vélibs sont disponibles.
 
 ## Fonctionnalités
 - Authentification des utilisateurs (inscription, connexion, déconnexion)
